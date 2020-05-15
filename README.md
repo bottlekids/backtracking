@@ -1,1 +1,5 @@
 # simple_tiny_backtracking
+
+This is some simple code which uses backtracking with reccursion to optimally arrange hotel bookings for a given time. 
+
+It is based on the Sudoku backtracking algorithm here https://www.youtube.com/watch?v=G_UYXzGuqvM 
