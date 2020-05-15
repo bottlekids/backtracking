@@ -1,5 +1,5 @@
 """
-This is a simple backtracking algorithm which uses a bit of reccursion to plot hotel reservations on a list of lists which represents 
+This is a simple backtracking algorithm which uses a bit of recursion to plot hotel reservations on a list of lists which represents 
 week days and rooms. Some of the guests are already checked in and can't be moved. All rooms are of the same type. 
 """
 
