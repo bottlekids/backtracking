@@ -1,16 +1,6 @@
 """
-Thank you for taking the time to look at my code. 
-Also available here: https://github.com/bottlekids/simple_tiny_backtracking 
-
-This is a simple backtracking algorithm which uses a bit of reccursion to plot hotel reservations on a simple 
-calendar. The reservations are instances of a class and the calendar is just a list of lists. Some of the guests
-are already checked in and can't be moved. All rooms are of the same type. 
-
-I chose to make this a part of my application for the Ausbildung because:
-1. It can't be done without truly understanding how the code works
-2. It addresses a real-life issue I had as a receptionist in a hostel by showing how a tedious task can 
-eventually be automated
-
+This is a simple backtracking algorithm which uses a bit of reccursion to plot hotel reservations on a list of lists which represents 
+week days and rooms. Some of the guests are already checked in and can't be moved. All rooms are of the same type. 
 """
 
 from tabulate import tabulate 
@@ -65,6 +55,7 @@ guest12 = Booking("Perd", 0, 6, False, None)
 guest13 = Booking("Mark", 1, 6, False, None)
 guest14 = Booking("Tammy2", 0, 4, False, None)
 
+#to overbook uncomment guest
 #guest15 = Booking("Tammy1", 4, 6, False, None)
 
 
@@ -76,7 +67,7 @@ def plot_fixed():
 			guest.populate_week_overview(guest.room, reverse=False)
 			guest.assigned = True
 
-# This function checks if all fields from check-in to check-out are free so the guest can given a room
+# This function checks if all fields from check-in to check-out are free so the guest can be given a room
 def is_possible(guest, room):
 	for cell in room[guest.check_in:guest.check_out]:
 		if isinstance (cell, Booking):
@@ -96,7 +87,7 @@ def optimal_arrangement():
 					optimal_arrangement()
 					"""
 					Our function runs recursively and every time it finds a spot for a guest it will change their
-					"assigned" variable to True so eventually there weill be none left and the function will 
+					"assigned" variable to True so eventually there will be none left and the function will 
 					print out the solution. For this to make sense there has to be a meaningful relationship between 
 					the objects we iterate over in our guest list so that a step back could enable an efficient 
 					second attempt in the future. If the guests are randomly arranged in the guest list
