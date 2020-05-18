@@ -1,6 +1,7 @@
 """
-This is a simple backtracking algorithm which uses a bit of recursion to plot hotel reservations on a list of lists which represents 
-week days and rooms. Some of the guests are already checked in and can't be moved. All rooms are of the same type. 
+This is a simple backtracking algorithm which uses recursion to plot hotel reservations on a simple calendar. 
+The reservations are instances of a Python class and the calendar is just a list of lists. 
+Some of the guests are already checked in and can't be moved. All rooms are of the same type. 
 """
 
 from tabulate import tabulate 
@@ -24,13 +25,17 @@ class Booking:
 
 		guest_list.append(self)
 
+		if self.check_in >= self.check_out:
+			print (f"The check-in date for guest {self} is the same as or later than the check-out date. Please revise.")
+
+
 	def __repr__(self):
 		return self.name[:8]
 
 	def populate_week_overview(self, room_number, reverse):
 		date_counter = self.check_in
-		# Because a backtracking algorithm requires that the object erase itself if it doesn't satisfy the 
-		# conditions, I add a parameter "reverse". If it returns True, the object erases itself. 
+		# Because a backtracking algorithm requires that the object erase itself if its next recursion doesn't   
+		# satisfy the conditions, I add a parameter "reverse". If it returns True, the object erases itself. 
 		if reverse:
 			while date_counter <= self.check_out:
 				week_overview [room_number][date_counter] = empty_cell
@@ -40,7 +45,7 @@ class Booking:
 			date_counter += 1
 				
 # Creating some guests:
-guest1 = Booking("Tom", 0, 4, True, 1)
+guest1 = Booking("Tom", 1, 4, True, 1)
 guest2 = Booking("Ron", 0, 1, True, 3)
 guest3 = Booking("Leslie", 1, 5, False, None)
 guest4 = Booking("April", 4, 6, False, None)
@@ -55,10 +60,10 @@ guest12 = Booking("Perd", 0, 6, False, None)
 guest13 = Booking("Mark", 1, 6, False, None)
 guest14 = Booking("Tammy2", 0, 4, False, None)
 
-#to overbook uncomment guest
+# Uncomment this guest to overbook
 #guest15 = Booking("Tammy1", 4, 6, False, None)
 
-
+# Arrange by check-in 
 guest_list.sort(key=lambda x: x.check_in)
 
 def plot_fixed():
@@ -87,7 +92,7 @@ def optimal_arrangement():
 					optimal_arrangement()
 					"""
 					Our function runs recursively and every time it finds a spot for a guest it will change their
-					"assigned" variable to True so eventually there will be none left and the function will 
+					"assigned" variable to True so eventually there weill be none left and the function will 
 					print out the solution. For this to make sense there has to be a meaningful relationship between 
 					the objects we iterate over in our guest list so that a step back could enable an efficient 
 					second attempt in the future. If the guests are randomly arranged in the guest list
@@ -109,4 +114,6 @@ optimal_arrangement()
 
 # If there are solutions we will remain in the recursive function. Otherwise we print out the error message:
 print("Overbooked")
+
+
 
